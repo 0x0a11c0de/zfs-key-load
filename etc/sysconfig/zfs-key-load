@@ -1,0 +1,4 @@
+# Configuration for loading ZFS keys from Azure Key Vault
+
+ZFS_KEY_API_URI="https://your-server.tld"
+ZFS_KEY_API_TOKEN="token"
