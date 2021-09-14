@@ -35,8 +35,7 @@ def _zfs_load_key(dataset, key):
                 file=sys.stderr
             )
             raise SystemExit(2)
-        else:
-            print(f'Loaded key for dataset "{dataset}"')
+        print(f'Loaded key for dataset "{dataset}"')
     except Exception as exc:
         print(
             f'Error: load-key for dataset "{dataset}" failed: {str(exc)}',
@@ -53,6 +52,7 @@ def _zfs_mount(dataset):
             file=sys.stderr
         )
         raise SystemExit(4)
+    print(f'Mounted dataset "{dataset}"')
 
 
 if __name__ == '__main__':
