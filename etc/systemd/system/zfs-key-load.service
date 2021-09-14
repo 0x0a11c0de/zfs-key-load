@@ -10,7 +10,6 @@ Type=oneshot
 EnvironmentFile=-/etc/sysconfig/zfs-key-load
 RemainAfterExit=yes
 ExecStart=/usr/local/bin/zfs-key-load
-ExecStartPost=-/bin/systemctl restart zfs-mount.service
 TimeoutStartSec=120
 
 [Install]

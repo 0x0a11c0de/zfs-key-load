@@ -6,6 +6,7 @@ import secrets
 import requests
 import pexpect
 import sys
+import subprocess
 from urllib.parse import urljoin
 
 
@@ -44,6 +45,16 @@ def _zfs_load_key(dataset, key):
         raise SystemExit(3)
 
 
+def _zfs_mount(dataset):
+    proc = subprocess.run(['zfs', 'mount', dataset])
+    if proc.returncode:
+        print(
+            f'Error: mount for dataset "{dataset}" failed with exit status {proc.returncode}',
+            file=sys.stderr
+        )
+        raise SystemExit(4)
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='ZFS integration with Azure Key Vault')
     parser.add_argument('-u', '--zfs-key-api-uri', default=os.environ.get('ZFS_KEY_API_URI'),
@@ -60,5 +71,6 @@ if __name__ == '__main__':
     datasets = _get_datasets(args.zfs_key_api_uri, args.zfs_key_api_token)
     for dataset in datasets:
         _zfs_load_key(dataset['dataset'], dataset['key'])
+        _zfs_mount(dataset['dataset'])
 
     raise SystemExit(0)
