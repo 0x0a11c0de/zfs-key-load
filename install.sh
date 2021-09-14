@@ -4,6 +4,7 @@ mkdir -p /etc/sysconfig
 if [ ! -f /etc/sysconfig/zfs-key-load ]; then
   cp etc/sysconfig/zfs-key-load /etc/sysconfig
 fi
+chmod 600 /etc/sysconfig/zfs-key-load
 
 mkdir -p /etc/systemd/system
 cp etc/systemd/system/zfs-key-load.service /etc/systemd/system
