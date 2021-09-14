@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
 mkdir -p /etc/sysconfig
-cp etc/sysconfig/* /etc/sysconfig
+if [ ! -f /etc/sysconfig/zfs-key-load ]; then
+  cp etc/sysconfig/zfs-key-load /etc/sysconfig
+fi
 
 mkdir -p /etc/systemd/system
-cp etc/systemd/system/* /etc/systemd/system
+cp etc/systemd/system/zfs-key-load.service /etc/systemd/system
 
 systemctl daemon-reload
 systemctl enable zfs-key-load
